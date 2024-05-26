@@ -52,8 +52,9 @@ class camera {
             // ignores hits close to the estimated intersection point
             // calculating reflected ray origins with tolerance
             if (world.hit(r,interval(0.001, infinity), rec)) {
-                vec3 direction = random_on_hemisphere(rec.normal);
-                // return matte gray
+                // Replacement diffuse with non-uniform Lambertian distribution
+                vec3 direction = rec.normal + random_unit_vector();
+                // return matte gray (color is affected by ambient light)
                 return 0.5 * ray_color(ray(rec.p, direction), depth-1, world);
             }
 
