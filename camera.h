@@ -53,7 +53,7 @@ class camera {
             // calculating reflected ray origins with tolerance
             if (world.hit(r,interval(0.001, infinity), rec)) {
                 // Replacement diffuse with non-uniform Lambertian distribution
-                vec3 direction = rec.normal + random_unit_vector();
+                vec3 direction = replacement_diffuse(rec.normal);
                 // return matte gray (color is affected by ambient light)
                 return 0.5 * ray_color(ray(rec.p, direction), depth-1, world);
             }
@@ -120,6 +120,16 @@ class camera {
         vec3 sample_square() const {
             // Returns the vector to a random point in the [-.5, -.5]-[+.5, +.5] unit square
             return vec3(random_double() - 0.5, random_double() - 0.5, 0);
+        }
+
+        // uniform diffuse
+        vec3 uniform_diffuse(vec3 normal) const {
+            return random_on_hemisphere(normal);
+        }
+
+        // replacement diffuse with non-uniform Lambertian distribution
+        vec3 replacement_diffuse(vec3 normal) const {
+            return normal + random_unit_vector();
         }
 };
 
