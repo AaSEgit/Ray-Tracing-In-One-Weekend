@@ -55,7 +55,7 @@ class camera {
                 // Replacement diffuse with non-uniform Lambertian distribution
                 vec3 direction = replacement_diffuse(rec.normal);
                 // return matte gray (color is affected by ambient light)
-                return 0.5 * ray_color(ray(rec.p, direction), depth-1, world);
+                return 0.9 * ray_color(ray(rec.p, direction), depth-1, world);
             }
 
             vec3 unit_direction = unit_vector(r.direction());
