@@ -49,7 +49,9 @@ class camera {
             }
 
             hit_record rec;
-            if (world.hit(r,interval(0, infinity), rec)) {
+            // ignores hits close to the estimated intersection point
+            // calculating reflected ray origins with tolerance
+            if (world.hit(r,interval(0.001, infinity), rec)) {
                 vec3 direction = random_on_hemisphere(rec.normal);
                 // return matte gray
                 return 0.5 * ray_color(ray(rec.p, direction), depth-1, world);
