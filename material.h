@@ -33,7 +33,7 @@ class lambertian : public material {
         const override {
             auto scatter_direction = rec.normal + random_unit_vector();
 
-            // catch degenrate scatter direction
+            // catch degenerate scatter direction
             if (scatter_direction.near_zero())
                 scatter_direction = rec.normal;
             
