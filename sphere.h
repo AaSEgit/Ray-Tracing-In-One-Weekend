@@ -7,7 +7,7 @@
 class sphere : public hittable {
     public:
         // constructor initializing sphere with a material
-        sphere(const point3& center, double radius) 
+        sphere(const point3& center, double radius, shared_ptr<material> mat) 
             : center(center), radius(fmax(0, radius)), mat(mat) {}
 
         // determines if a ray intersects with a sphere
