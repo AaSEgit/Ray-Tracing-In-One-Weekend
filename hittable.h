@@ -3,10 +3,16 @@
 
 #include "rtweekend.h"
 
+// abstract class
+class material;
+
+// contains information about the material assigned to the surface of 
+// an object that was hit by a ray
 class hit_record {
     public:
         point3 p;
         vec3 normal;
+        shared_ptr<material> mat;   // material pointer
         double t;
         bool front_face;
 

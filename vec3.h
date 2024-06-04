@@ -57,6 +57,12 @@ class vec3 {
             return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
         }
 
+        // returns true if the vector is very close to 0 in all dimensions
+        bool near_zero() const {
+            auto s = 1e-8;
+            return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
+        }
+
         // default constructor for generating random vector
         static vec3 random() {
             return vec3(random_double(), random_double(), random_double());
