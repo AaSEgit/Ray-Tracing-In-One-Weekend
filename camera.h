@@ -4,6 +4,7 @@
 #include "rtweekend.h"
 
 #include "hittable.h"
+#include "material.h"
 
 // 1. Constructs and dispatches rays into the world
 // 2. Uses the results of these rays to construct a rendered image
@@ -52,10 +53,13 @@ class camera {
             // ignores hits close to the estimated intersection point
             // calculating reflected ray origins with tolerance
             if (world.hit(r,interval(0.001, infinity), rec)) {
-                // Replacement diffuse with non-uniform Lambertian distribution
-                vec3 direction = replacement_diffuse(rec.normal);
+                // ray color is affected by material information
+                ray scattered;
+                color attenuation;
+                if(rec.mat->scatter(r, rec, attenuation, scattered))
+                    return attenuation * ray_color(scattered, depth-1, world);
                 // return matte gray (color is affected by ambient light)
-                return 0.5 * ray_color(ray(rec.p, direction), depth-1, world);
+                return color(0,0,0);
             }
 
             vec3 unit_direction = unit_vector(r.direction());

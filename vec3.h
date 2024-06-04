@@ -159,4 +159,13 @@ inline vec3 random_on_hemisphere(const vec3& normal) {
         return -on_unit_sphere;
 }
 
+// ray reflection
+inline vec3 reflect(const vec3& v, const vec3& n) {
+    // 1. ray = v + 2b
+    // 2. b is the projection of v onto unit vector n = v*n
+    // 3. if n is not a unit vector, divide dot product by length of n
+    // 4. negate projection length so it points out of the surface
+    return v - 2*dot(v,n)*n;
+}
+
 #endif  // end of header file

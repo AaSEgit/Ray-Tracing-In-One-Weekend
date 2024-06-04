@@ -44,7 +44,32 @@ class lambertian : public material {
         }
 
     private:
+        // fractional reflectance
+        // material color and incident viewing direction (direction of incoming ray)
         color albedo;
+};
+
+// metal material class definition
+class metal : public material {
+    public:
+        // implements abstract constructor of material class
+        metal(const color& albedo) : albedo(albedo) {}
+
+        bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered)
+        const override {
+            vec3 reflected = reflect(r_in.direction(), rec.normal);
+            scattered = ray(rec.p, reflected);
+            // ray from brushed metal does not scatter as much, more concentrated reflection
+            attenuation = albedo;
+            return true;
+        }
+
+    private:
+        // fractional reflectance
+        // material color and incident viewing direction (direction of incoming ray)
+        color albedo;
+
+
 };
 
 #endif

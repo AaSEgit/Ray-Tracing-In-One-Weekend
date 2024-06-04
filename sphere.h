@@ -6,9 +6,9 @@
 
 class sphere : public hittable {
     public:
-        sphere(const point3& center, double radius) : center(center), radius(fmax(0, radius)) {
-            // TODO: Initialize the material pointer 'mat'
-        }
+        // constructor initializing sphere with a material
+        sphere(const point3& center, double radius) 
+            : center(center), radius(fmax(0, radius)), mat(mat) {}
 
         // determines if a ray intersects with a sphere
         bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
