@@ -1,4 +1,4 @@
-# Toy-Ray-Tracer
+# Ray-Tracing-In-One-Weekend
  Code referenced for learning purposes from "Ray Tracing In One Weekend" by Peter Shirley, Trever David Black, and Steve Hollasch
 
 
