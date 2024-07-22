@@ -159,13 +159,27 @@ inline vec3 random_on_hemisphere(const vec3& normal) {
         return -on_unit_sphere;
 }
 
-// ray reflection
+// ray reflection (ray bounces off surface material)
 inline vec3 reflect(const vec3& v, const vec3& n) {
     // 1. ray = v + 2b
     // 2. b is the projection of v onto unit vector n = v*n
     // 3. if n is not a unit vector, divide dot product by length of n
     // 4. negate projection length so it points out of the surface
     return v - 2*dot(v,n)*n;
+}
+
+// ray refraction (ray is partially absorbed into surface material at an angle)
+// Uses Snell's Law - etai*sin(theta) = etat*sin(theta-prime)
+inline vec3 refract(const vec3& uv, const vec3& n ,double etai_over_etat) {
+    // given two unit vectors, dot product between ray uv and surface normal n 
+    auto cos_theta = fmin(dot(-uv, n), 1.0);
+    // part of ray that is perpendicular to the surface normal
+    vec3 r_out_perp = etai_over_etat * (uv + cos_theta*n);
+    // part of ray that is parallel to the surface normal
+    vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+
+    // return refracted ray
+    return r_out_perp + r_out_parallel;
 }
 
 #endif  // end of header file
