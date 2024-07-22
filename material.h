@@ -23,6 +23,7 @@ class material {
 };
 
 // lambertian material class definition
+// supports matte surfaces
 class lambertian : public material {
     public:
         // implements abstract constructor of material class
@@ -50,6 +51,7 @@ class lambertian : public material {
 };
 
 // metal material class definition
+// supports regular and brushed metals
 class metal : public material {
     public:
         // implements abstract constructor of material class
@@ -71,8 +73,32 @@ class metal : public material {
         color albedo;
         // controls the randomness of reflected direction (fuzz factor)
         double fuzz;
+};
 
+// dialectric material class definition
+// supports clear materials like water, glass, diamond, etc.
+class dialectric : public material {
+    public:
+        dialectric(double refraction_index) : refraction_index(refraction_index) {}
 
+        bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered)
+        const override {
+            // dialectric that always refracts
+            attenuation = color(1.0, 1.0, 1.0);
+            // refraction index: the amount a refracted ray bends
+            double ri = rec.front_face ? (1.0/refraction_index) : refraction_index;
+
+            vec3 unit_direction = unit_vector(r_in.direction());
+            vec3 refracted = refract(unit_direction, rec.normal, ri);
+
+            scattered = ray(rec.p, refracted);
+            return true;
+        }
+
+    private:
+        // Refractive index in vacuum or air, or the ratio of the material's refractive index
+        // over the refractive index of the enclosing media
+        double refraction_index;
 };
 
 #endif
