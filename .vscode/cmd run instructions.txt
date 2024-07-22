@@ -1,0 +1,3 @@
+"g++ -Wall ${fileDirname} -o ${fileBasenameNoExtension}.exe"
+
+"${fileBasenameNoExtension}.exe > ${imageBasenameNoExtension}.ppm"
