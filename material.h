@@ -101,7 +101,7 @@ class dialectric : public material {
                 // total internal reflection (used for rays that glance/graze surface)
                 direction = reflect(unit_direction, rec.normal);
             else
-                // refraction
+                // refraction for near-direct rays
                 direction = refract(unit_direction, rec.normal, ri);
 
             scattered = ray(rec.p, direction);
