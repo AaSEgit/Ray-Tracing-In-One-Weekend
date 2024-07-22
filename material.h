@@ -86,6 +86,7 @@ class dialectric : public material {
             // dialectric that always refracts
             attenuation = color(1.0, 1.0, 1.0);
             // refraction index: the amount a refracted ray bends
+            // ri = 1.0 for air
             double ri = rec.front_face ? (1.0/refraction_index) : refraction_index;
 
             vec3 unit_direction = unit_vector(r_in.direction());
