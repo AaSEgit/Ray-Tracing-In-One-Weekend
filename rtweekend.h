@@ -9,7 +9,6 @@
 #include <memory>
 
 // C++ Std Usings
-
 using std::fabs;        // absolute value
 using std::make_shared;
 using std::shared_ptr;

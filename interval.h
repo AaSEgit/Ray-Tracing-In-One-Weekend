@@ -1,6 +1,7 @@
 #ifndef INTERVAL_H  // start of interval header file
 #define INTERVAL_H  // interval class definition
 
+// Import libraries
 #include "rtweekend.h"
 
 // manages real-valued intervals with a minimum and a maximum

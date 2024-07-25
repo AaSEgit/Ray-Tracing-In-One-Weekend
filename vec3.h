@@ -4,6 +4,7 @@
 // Import libraries
 #include "rtweekend.h"
 
+// C++ Std Usings
 using std::sqrt;
 
 class vec3 {
@@ -22,10 +23,10 @@ class vec3 {
         // negation
         vec3 operator-() const {return vec3(-e[0], -e[1], -e[2]);} 
 
-        // vector access 
+        // vector access
         double operator[](int i) const {return e[i];} 
 
-        // vector access by reference  
+        // vector access by reference
         double& operator[](int i) {return e[i];}    
 
         // addition assignment
