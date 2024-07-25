@@ -1,6 +1,7 @@
-#ifndef MATERIAL_H
-#define MATERIAL_H
+#ifndef MATERIAL_H  // start of material header class
+#define MATERIAL_H  // material class definition
 
+// Import libraries
 #include "rtweekend.h"
 #include "hittable.h"
 
@@ -125,4 +126,4 @@ class dialectric : public material {
         }
 };
 
-#endif
+#endif  // end of material header class

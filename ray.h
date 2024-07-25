@@ -1,6 +1,7 @@
 #ifndef RAY_H   // start of header file
 #define RAY_H   // ray class definition
 
+// Import libraries
 #include "vec3.h"
 
 class ray {

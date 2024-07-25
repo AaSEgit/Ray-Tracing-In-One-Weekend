@@ -1,8 +1,7 @@
-#ifndef SPHERE_H
-#define SPHERE_H
+#ifndef SPHERE_H    // start of sphere header file
+#define SPHERE_H    // sphere class definition
 
 // Import libraries
-
 #include "hittable.h"
 #include "rtweekend.h"
 
@@ -52,4 +51,4 @@ class sphere : public hittable {
         shared_ptr<material>    mat;
 };
 
-#endif
+#endif  // end of sphere header file

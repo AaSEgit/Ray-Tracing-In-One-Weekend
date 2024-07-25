@@ -1,8 +1,7 @@
-#ifndef VEC3_H  // start of header file
+#ifndef VEC3_H  // start of vec3 header file
 #define VEC3_H  // vec3 class definition
 
 // Import libraries
-
 #include "rtweekend.h"
 
 using std::sqrt;
@@ -187,4 +186,4 @@ inline vec3 refract(const vec3& uv, const vec3& n ,double etai_over_etat) {
     return r_out_perp + r_out_parallel;
 }
 
-#endif  // end of header file
+#endif  // end of vec3 header file

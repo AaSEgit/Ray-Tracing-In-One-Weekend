@@ -1,8 +1,8 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef CAMERA_H    // start of camera header file
+#define CAMERA_H    // camera class defintition
 
+// Import libraries
 #include "rtweekend.h"
-
 #include "hittable.h"
 #include "material.h"
 
@@ -137,4 +137,4 @@ class camera {
         }
 };
 
-#endif
+#endif  // end of camera header file

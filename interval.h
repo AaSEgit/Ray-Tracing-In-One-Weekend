@@ -1,5 +1,5 @@
-#ifndef INTERVAL_H
-#define INTERVAL_H
+#ifndef INTERVAL_H  // start of interval header file
+#define INTERVAL_H  // interval class definition
 
 #include "rtweekend.h"
 
@@ -41,4 +41,4 @@ class interval {
 const interval interval::empty      = interval(+infinity, -infinity);
 const interval interval::universe   = interval(-infinity, +infinity);
 
-#endif
+#endif  // end of interval header file

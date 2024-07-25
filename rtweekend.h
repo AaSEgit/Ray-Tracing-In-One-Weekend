@@ -1,4 +1,4 @@
-#ifndef RTWEEKEND_H
+#ifndef RTWEEKEND_H // start of rtweekend header file
 #define RTWEEKEND_H // common header file
 
 // Import libraries
@@ -43,4 +43,4 @@ inline double random_double(double min, double max) {
 #include "ray.h"
 #include "vec3.h"
 
-#endif
+#endif  // end of rtweekend header file

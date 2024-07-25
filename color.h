@@ -1,8 +1,7 @@
-#ifndef COLOR_H // start of header file
+#ifndef COLOR_H // start of color header file
 #define COLOR_H // color class definition
 
 // Import libraries
-
 #include "interval.h"
 #include "vec3.h"
 #include "rtweekend.h"
@@ -42,4 +41,4 @@ void write_color(std::ostream& out, const color& pixel_color) {
     out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
 }
 
-#endif // end of header file
+#endif // end of color header file

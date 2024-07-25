@@ -1,9 +1,10 @@
-#ifndef HITTABLE_LIST_H
-#define HITTABLE_LIST_H
+#ifndef HITTABLE_LIST_H // start of hittable_list header file
+#define HITTABLE_LIST_H // hittable_list class definition
 
+
+// Import libraries
 #include "hittable.h"
 #include "rtweekend.h"
-
 #include <vector>
 
 // stores a list of hittable objects
@@ -42,4 +43,4 @@ class hittable_list : public hittable {
         }
 };
 
-#endif
+#endif  // end of hittable_list header file

@@ -1,6 +1,7 @@
-#ifndef HITTABLE_H
-#define HITTABLE_H
+#ifndef HITTABLE_H  // start of hittable header file
+#define HITTABLE_H  // hittable class definition
 
+// Import libraries
 #include "rtweekend.h"
 
 // abstract class
@@ -33,4 +34,4 @@ class hittable {
         virtual bool hit(const ray& r, interval ray_t, hit_record& rec) const = 0;
 };
 
-#endif
+#endif  // end of hittable header file
