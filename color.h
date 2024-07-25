@@ -2,11 +2,12 @@
 #define COLOR_H // color class definition
 
 // Import libraries
+
 #include "interval.h"
 #include "vec3.h"
 #include "rtweekend.h"
 
-using color = vec3;
+using color = vec3; // vec3 color alias
 
 // color utility functions
 

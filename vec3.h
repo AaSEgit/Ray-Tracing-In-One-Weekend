@@ -2,6 +2,7 @@
 #define VEC3_H  // vec3 class definition
 
 // Import libraries
+
 #include "rtweekend.h"
 
 using std::sqrt;
@@ -20,9 +21,11 @@ class vec3 {
         double z() const {return e[2];}
 
         // negation
-        vec3 operator-() const {return vec3(-e[0], -e[1], -e[2]);}   
+        vec3 operator-() const {return vec3(-e[0], -e[1], -e[2]);} 
+
         // vector access 
         double operator[](int i) const {return e[i];} 
+
         // vector access by reference  
         double& operator[](int i) {return e[i];}    
 

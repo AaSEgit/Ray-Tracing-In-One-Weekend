@@ -59,20 +59,22 @@ class metal : public material {
 
         bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered)
         const override {
-            vec3 reflected = reflect(r_in.direction(), rec.normal);
-            reflected = unit_vector(reflected) + (fuzz * random_unit_vector());
-            scattered = ray(rec.p, reflected);
+            vec3 reflected  = reflect(r_in.direction(), rec.normal);
+            reflected       = unit_vector(reflected) + (fuzz * random_unit_vector());
+            scattered       = ray(rec.p, reflected);
+
             // ray from brushed metal does not scatter as much, more concentrated reflection
-            attenuation = albedo;
+            attenuation     = albedo;
+
             return (dot(scattered.direction(), rec.normal) > 0);
         }
 
     private:
         // fractional reflectance
         // material color and incident viewing direction (direction of incoming ray)
-        color albedo;
+        color   albedo;
         // controls the randomness of reflected direction (fuzz factor)
-        double fuzz;
+        double  fuzz;
 };
 
 // dialectric material class definition
@@ -84,14 +86,15 @@ class dialectric : public material {
         bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered)
         const override {
             // attenuation = 1 means the glass surface absorbs nothing
-            attenuation = color(1.0, 1.0, 1.0);
+            attenuation         = color(1.0, 1.0, 1.0);
+
             // refraction index: the amount a refracted ray bends
             // ri = 1.0 for air
-            double ri = rec.front_face ? (1.0/refraction_index) : refraction_index;
+            double ri           = rec.front_face ? (1.0/refraction_index) : refraction_index;
 
             vec3 unit_direction = unit_vector(r_in.direction());
-            double cos_theta = fmin(dot(-unit_direction, rec.normal), 1.0);
-            double sin_theta = sqrt(1.0 - cos_theta*cos_theta);
+            double cos_theta    = fmin(dot(-unit_direction, rec.normal), 1.0);
+            double sin_theta    = sqrt(1.0 - cos_theta*cos_theta);
 
             bool cannot_refract = ri * sin_theta > 1.0;
             vec3 direction;

@@ -121,8 +121,8 @@ class camera {
             return ray(ray_origin, ray_direction);
         }
 
+        // Returns the vector to a random point in the [-.5, -.5]-[+.5, +.5] unit square
         vec3 sample_square() const {
-            // Returns the vector to a random point in the [-.5, -.5]-[+.5, +.5] unit square
             return vec3(random_double() - 0.5, random_double() - 0.5, 0);
         }
 
