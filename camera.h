@@ -103,7 +103,7 @@ class camera {
             // Calculate the u,v,w unit basis vectors for the camera coordinate frame
             w = unit_vector(lookfrom - lookat);
             u = unit_vector(cross(vup, w));
-            v = cross(w,u); // TODO: fix definition for v??
+            v = cross(w,u);
 
             // Calculate the vectors across the horizontal and down the vertical viewport edges
             vec3 viewport_u = viewport_width * u;   // Vector across viewport horizontal edge
