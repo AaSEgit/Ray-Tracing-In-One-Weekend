@@ -28,7 +28,7 @@ class camera {
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
             // pixels are written in rows from left -> right and top -> bottom
-            for (int j = 0; j < image_height; j++) {        // Rows
+            for (int j = 0; j <= image_height; j++) {        // Rows
                 std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
                 for (int i = 0; i < image_width; i++) {     // Columns
                 // additive pixel color
