@@ -45,9 +45,9 @@ class sphere : public hittable {
         }
 
     private:
-        point3 center;
-        double radius;
-        shared_ptr<material> mat;
+        point3                  center;
+        double                  radius;
+        shared_ptr<material>    mat;
 };
 
 #endif

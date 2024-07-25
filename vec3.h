@@ -172,9 +172,11 @@ inline vec3 reflect(const vec3& v, const vec3& n) {
 // Uses Snell's Law - etai*sin(theta) = etat*sin(theta-prime)
 inline vec3 refract(const vec3& uv, const vec3& n ,double etai_over_etat) {
     // given two unit vectors, dot product between ray uv and surface normal n 
-    auto cos_theta = fmin(dot(-uv, n), 1.0);
+    auto cos_theta      = fmin(dot(-uv, n), 1.0);
+
     // part of ray that is perpendicular to the surface normal
-    vec3 r_out_perp = etai_over_etat * (uv + cos_theta*n);
+    vec3 r_out_perp     = etai_over_etat * (uv + cos_theta*n);
+    
     // part of ray that is parallel to the surface normal
     vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
 

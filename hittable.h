@@ -10,11 +10,11 @@ class material;
 // an object that was hit by a ray
 class hit_record {
     public:
-        point3 p;
-        vec3 normal;
-        shared_ptr<material> mat;   // material pointer
-        double t;
-        bool front_face;
+        point3                  p;
+        vec3                    normal;
+        shared_ptr<material>    mat;   // material pointer
+        double                  t;
+        bool                    front_face;
 
         // sets the hit record normal vector
         // NOTE: the parameter outward_normal is assumed to have unit length
