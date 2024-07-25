@@ -14,6 +14,7 @@ int main() {
     // World
     hittable_list world;
 
+    /*
     // create sphere objects
     auto material_ground    = make_shared<lambertian>(color(0.8, 0.8, 0.0));
     auto material_center    = make_shared<lambertian>(color(0.1, 0.2, 0.5));
@@ -27,6 +28,16 @@ int main() {
     world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
     world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.4, material_bubble));
     world.add(make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+    */
+
+   // Test adjustable field-of-view (fov)
+   auto R = cos(pi/4);
+
+   auto material_left  = make_shared<lambertian>(color(0,0,1));
+   auto material_right = make_shared<lambertian>(color(1,0,0));
+
+   world.add(make_shared<sphere>(point3(-R, 0, -1), R, material_left));
+   world.add(make_shared<sphere>(point3(R, 0, -1), R, material_right));
 
     // Camera
     camera cam;
@@ -35,6 +46,8 @@ int main() {
     cam.image_width         = 400;
     cam.samples_per_pixel   = 100;
     cam.max_depth           = 50;
+
+    cam.vfov = 90;  // orthographic wide-angle view
 
     // Render
     cam.render(world);
