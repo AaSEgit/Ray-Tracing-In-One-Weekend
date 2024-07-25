@@ -27,9 +27,9 @@ class camera {
 
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
-            // pixels are written in rows from left -> right and bottom -> top
-            for (int j = image_height; j >= 0; j--) {        // Rows
-                std::clog << "\rScanlines remaining: " << (j) << ' ' << std::flush;
+            // pixels are written in rows from left -> right and top -> bottom
+            for (int j = 0; j <= image_height; j++) {        // Rows
+                std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
                 for (int i = 0; i < image_width; i++) {     // Columns
                 // additive pixel color
                     color pixel_color(0,0,0);
@@ -103,19 +103,18 @@ class camera {
             // Calculate the u,v,w unit basis vectors for the camera coordinate frame
             w = unit_vector(lookfrom - lookat);
             u = unit_vector(cross(vup, w));
-            v = cross(w,u);
+            v = cross(w,u); // TODO: fix definition for v??
 
             // Calculate the vectors across the horizontal and down the vertical viewport edges
-            vec3 viewport_u = vec3(viewport_width, 0, 0);
-            vec3 viewport_v = vec3(0, viewport_height, 0);
+            vec3 viewport_u = viewport_width * u;   // Vector across viewport horizontal edge
+            vec3 viewport_v = viewport_height * -v; // Vector down viewport vertical edge
 
             // Calculate the horizontal and vertical delta vectors from pixel to pixel
             pixel_delta_u = viewport_u / image_width;
             pixel_delta_v = viewport_v / image_height;
 
             // Calculate the location of the upper left pixel
-            auto viewport_upper_left = 
-                center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
+            auto viewport_upper_left = center - (focal_length * w) - viewport_u/2 - viewport_v/2;
             pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
         }
 
