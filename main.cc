@@ -14,36 +14,37 @@ int main() {
     // World
     hittable_list world;
 
-    // create sphere objects
-    auto material_ground    = make_shared<lambertian>(color(0.8, 0.8, 0.0));
-    auto material_center    = make_shared<lambertian>(color(0.1, 0.2, 0.5));
-    auto material_left      = make_shared<dialectric>(1.50);
-    auto material_bubble    = make_shared<dialectric>(1.00 / 1.50);
-    auto material_right     = make_shared<metal>(color(0.8, 0.6, 0.2), 1.0);
+    // create and add ground material to world scene
+    auto material_ground    = make_shared<lambertian>(color(0.5, 0.5, 0.5));
+    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, material_ground));
 
-    // add objects to the world scene
-    world.add(make_shared<sphere>(point3( 0.0, -100.5, -1.0), 100.0, material_ground));
-    world.add(make_shared<sphere>(point3( 0.0,    0.0, -1.2),   0.5, material_center));
-    world.add(make_shared<sphere>(point3(-1.0,    0.0, -1.0),   0.5, material_left));
-    world.add(make_shared<sphere>(point3(-1.0,    0.0, -1.0),   0.4, material_bubble));
-    world.add(make_shared<sphere>(point3( 1.0,    0.0, -1.0),   0.5, material_right));
+
+    // create and add 3 large spheres to the world scene
+    auto material1 = make_shared<dialectric>(1.5);
+    world.add(make_shared<sphere>(point3(0,1,0), 1.0, material1));
+
+    auto material2 = make_shared<lambertian>(color(0.4, 0.2, 0.1));
+    world.add(make_shared<sphere>(point3(-4, 1, 0), 1.0, material2));
+
+    auto material3 = make_shared<metal>(color(0.7, 0.6, 0.5), 0.0);
+    world.add(make_shared<sphere>(point3(4, 1, 0), 1.0, material3));
 
     // Camera
     camera cam;
 
     cam.aspect_ratio        = 16.0 / 9.0;
     cam.image_width         = 400;
-    cam.samples_per_pixel   = 100;
+    cam.samples_per_pixel   = 10;
     cam.max_depth           = 50;
 
-    cam.vfov        = 20;  // wide-angle view
-    cam.lookfrom    = point3(-2,2,1);
-    cam.lookat      = point3(0,0,-1);
+    cam.vfov        = 100;  // wide-angle view
+    cam.lookfrom    = point3(13,2,3);
+    cam.lookat      = point3(0,0,0);
     cam.vup         = vec3(0,1,0);
     
     // depth-of-field (defocus blur)
-    cam.defocus_angle   = 10.0;
-    cam.focus_dist      = 3.4;
+    cam.defocus_angle   = 0.6;
+    cam.focus_dist      = 10.0;
 
     // Render
     cam.render(world);
