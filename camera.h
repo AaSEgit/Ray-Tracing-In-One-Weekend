@@ -31,7 +31,7 @@ class camera {
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
             // pixels are written in rows from left -> right and top -> bottom
-            for (int j = 0; j <= image_height; j++) {        // Rows
+            for (int j = 0; j < image_height; j++) {        // Rows
                 std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
                 for (int i = 0; i < image_width; i++) {     // Columns
                 // additive pixel color
@@ -47,34 +47,6 @@ class camera {
             }
 
             std::clog << "\rDone.               \n";
-        }
-
-        // return color for a given scene ray
-        color ray_color(const ray& r, int depth, const hittable& world) {
-            // If we've exceeded the ray bounce limit, no more light is gathered
-            // return black outside depth limit
-            if (depth <= 0) {
-                return color(0,0,0);
-            }
-
-            hit_record rec;
-
-            // ignores hits close to the estimated intersection point
-            // calculating reflected ray origins with tolerance
-            if (world.hit(r,interval(0.001, infinity), rec)) {
-                // ray color is affected by material information
-                ray scattered;
-                color attenuation;
-                if(rec.mat->scatter(r, rec, attenuation, scattered))
-                    return attenuation * ray_color(scattered, depth-1, world);
-                // return matte gray (color is affected by ambient light)
-                return color(0,0,0);
-            }
-
-            vec3 unit_direction = unit_vector(r.direction());
-            auto a = 0.5*(unit_direction.y() + 1.0);
-            // blendedValue = (1-a)*startValue + a*endValue
-            return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
         }
 
     private:
@@ -101,7 +73,7 @@ class camera {
             // Determine viewport dimensions
             //auto focal_length    = (lookfrom - lookat).length();
             auto theta           = degrees_to_radians(vfov); // vertical field of view in radians
-            auto h               = tan(theta/2);             // y-plane opposite vfov (intersects z-plane)
+            auto h               = std::tan(theta/2);             // y-plane opposite vfov (intersects z-plane)
             auto viewport_height = 2 * h * focus_dist;       // y-plane opposite vfov (full-length)
             // Viewport widths less than one are ok since they are real valued
             auto viewport_width = viewport_height * (double(image_width)/image_height);
@@ -145,9 +117,42 @@ class camera {
             return ray(ray_origin, ray_direction);
         }
 
+        // return color for a given scene ray
+        color ray_color(const ray& r, int depth, const hittable& world) {
+            // If we've exceeded the ray bounce limit, no more light is gathered
+            // return black outside depth limit
+            if (depth <= 0) {
+                return color(0,0,0);
+            }
+
+            hit_record rec;
+
+            // ignores hits close to the estimated intersection point
+            // calculating reflected ray origins with tolerance
+            if (world.hit(r,interval(0.001, infinity), rec)) {
+                // ray color is affected by material information
+                ray scattered;
+                color attenuation;
+                if(rec.mat->scatter(r, rec, attenuation, scattered))
+                    return attenuation * ray_color(scattered, depth-1, world);
+                // return matte gray (color is affected by ambient light)
+                return color(0,0,0);
+            }
+
+            vec3 unit_direction = unit_vector(r.direction());
+            auto a = 0.5*(unit_direction.y() + 1.0);
+            // blendedValue = (1-a)*startValue + a*endValue
+            return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
+        }
+
         // Returns the vector to a random point in the [-.5, -.5]-[+.5, +.5] unit square
         vec3 sample_square() const {
             return vec3(random_double() - 0.5, random_double() - 0.5, 0);
+        }
+        
+        // Returns a random point in the unit (radius 0.5) disk centered at the origin
+        vec3 sample_disk(double radius) const {
+            return radius * random_in_unit_disk();
         }
 
         // Returns a random point in the camera defocus disk
