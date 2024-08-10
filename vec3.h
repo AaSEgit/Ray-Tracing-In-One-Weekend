@@ -136,6 +136,15 @@ inline vec3 unit_vector(const vec3& v) {
     return v / v.length();
 }
 
+// generates a random point inside unit disk
+inline vec3 random_in_unit_disk() {
+    while (true) {
+        auto p = vec3(random_double(-1,1), random_double(-1,1), 0);
+        if (p.length_squared() < 1)
+            return p;
+    }
+}
+
 // generates a random unit vector using a rejection method
 // 1. Generate a random vector inside of the unit sphere (center to surface)
 // 2. Normalize this vector (clamp its value to the surface)

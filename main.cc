@@ -36,10 +36,14 @@ int main() {
     cam.samples_per_pixel   = 100;
     cam.max_depth           = 50;
 
-    cam.vfov = 90;  // wide-angle view
-    cam.lookfrom = point3(-2,2,1);
-    cam.lookat = point3(0,0,-1);
-    cam.vup = vec3(0,1,0);
+    cam.vfov        = 20;  // wide-angle view
+    cam.lookfrom    = point3(-2,2,1);
+    cam.lookat      = point3(0,0,-1);
+    cam.vup         = vec3(0,1,0);
+    
+    // depth-of-field (defocus blur)
+    cam.defocus_angle   = 10.0;
+    cam.focus_dist      = 3.4;
 
     // Render
     cam.render(world);
